@@ -1,0 +1,72 @@
+<div mat-dialog-title>
+  <h1>Employee Form</h1>
+</div>
+<div mat-dialog-content class="content">
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" placeholder="Ex. Technical">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Ex. Babaji">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" placeholder="Ex. test@gmail.com">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date of birth</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-radio-group aria-label="Select an option">
+      <mat-label>Gendar</mat-label>
+      <mat-radio-button value="male">Male</mat-radio-button>
+      <mat-radio-button value="femele">Femele</mat-radio-button>
+      <mat-radio-button value="other">Other</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite food</mat-label>
+      <mat-select >
+        <mat-option *ngFor="let val of education" [value]="val">
+          {{val}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Company</mat-label>
+      <input matInput placeholder="Ex. Google">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Experience</mat-label>
+      <input matInput placeholder="Ex. 4" type="number">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Package</mat-label>
+      <input matInput placeholder="Ex. 12" type="number">
+      <!--  คำแนะนำ   -->
+      <mat-hint>In rupees</mat-hint>
+    </mat-form-field>
+  </div>
+
+</div>
+<div>
+  <button mat-raised-button>Cancel</button>
+  <button mat-raised-button color="primary">Primary</button>
+</div>
