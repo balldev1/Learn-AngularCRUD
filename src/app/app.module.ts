@@ -8,7 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
-import {MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -16,6 +16,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule, MatButtonModule, MatIconModule, MatDialogTitle, MatDialogContent, MatInputModule, MatInput,
-    MatFormFieldModule,MatDatepickerModule,MatRadioModule,MatSelectModule
+    MatFormFieldModule, MatDatepickerModule, MatRadioModule, MatSelectModule, MatDialogActions,ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),
