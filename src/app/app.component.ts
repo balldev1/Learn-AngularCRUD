@@ -2,8 +2,8 @@ import {Component, OnInit,ViewChild} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {EmpAddEditComponent} from "./emp-add-edit/emp-add-edit.component";
 import {EmployeeService} from "./services/employee.service";
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatPaginator,} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
@@ -47,17 +47,24 @@ export class AppComponent implements OnInit {
     this.getEmployeeList();
   }
 
+  //mat-paginator แสดงข้อมูลตามที่ต้องการ
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   openAddEditEmpForm(){
     this._dialog.open(EmpAddEditComponent);
   }
 
   getEmployeeList(){
-    this._empService.getEmployee().subscribe({
+    this._empService.getEmployeeList().subscribe({
       next: (res)=>{
         // อัพเดทข้อมูลใหม่ที่ได้จาก res
         this.dataSource = new MatTableDataSource(res);
         //เรียงข้อมูลจาก 0 => 1
-        this.dataSource.sort = this.sort
+        this.dataSource.sort = this.sort;
+        console.log(this.dataSource.data)
         this.dataSource.paginator = this.paginator;
       },
       error:(err)=>{
@@ -74,5 +81,6 @@ export class AppComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 
 }
