@@ -17,6 +17,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule, MatButtonModule, MatIconModule, MatDialogTitle, MatDialogContent, MatInputModule, MatInput,
-    MatFormFieldModule, MatDatepickerModule, MatRadioModule, MatSelectModule, MatDialogActions,ReactiveFormsModule
+    MatFormFieldModule, MatDatepickerModule, MatRadioModule, MatSelectModule, MatDialogActions,ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),

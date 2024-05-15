@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some commentt",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "employees": [
+    {
+      "id": "a68d",
+      "firstName": "sadsad",
+      "lastName": "asdasd",
+      "email": "balldev1@hotmail.com",
+      "dob": "2024-05-06T17:00:00.000Z",
+      "gender": "",
+      "education": "",
+      "company": "asdasd",
+      "experience": 2222,
+      "package": 23232
+    },
+    {
+      "id": "90e7",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@gmail.com",
+      "dob": "2024-05-06T17:00:00.000Z",
+      "gender": "male",
+      "education": "Post Graduate",
+      "company": "213",
+      "experience": 222,
+      "package": 222
+    }
+  ]
+}
