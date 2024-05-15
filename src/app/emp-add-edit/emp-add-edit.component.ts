@@ -43,16 +43,37 @@ export class EmpAddEditComponent {
   }
 
   onFormSubmit(){
+    // มีข้อมูลเข้ามา
     if(this.empForm.valid){
-      this._empService.addEmployee(this.empForm.value).subscribe({
-        next:(val: any)=>{
-          alert("Employee added successfully");
-          this._dialogRef.close();
-        },
-        error:(err: any)=>{
-          console.error(err);
-        }
-      });
+      // ข้อมูลเป็นค่าว่าง ''
+      if (this.empForm.value.firstName === "" ||
+        this.empForm.value.lastName === "" ||
+        this.empForm.value.email === "" ||
+        this.empForm.value.dob === "" ||
+        this.empForm.value.gender === "" ||
+        this.empForm.value.education === "" ||
+        this.empForm.value.company === "" ||
+        this.empForm.value.experience === "" ||
+        this.empForm.value.package === "")
+      {
+        alert("Please fill in all required fields.");
+      } else {
+        // ข้อมูลไม่เป็นค่าว่าง ''
+        this._empService.addEmployee(this.empForm.value).subscribe({
+          next:(val: any)=>{
+            alert("Employee added successfully");
+            this._dialogRef.close()
+            window.location.reload();
+          },
+          error:(err: any)=>{
+            console.error(err);
+          }
+        });
+      }
+    } else {
+      alert("Please fill in all required fields.");
     }
   }
+
+
 }
