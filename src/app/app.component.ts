@@ -5,6 +5,7 @@ import {EmployeeService} from "./services/employee.service";
 import {MatPaginator,} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {CoreService} from "./core/core.service";
 
 @Component({
   selector: 'app-root',
@@ -40,10 +41,11 @@ export class AppComponent implements OnInit {
   // method
   constructor(
     private _dialog: MatDialog,
-    private _empService: EmployeeService
+    private _empService: EmployeeService,
+    private _coreService: CoreService
   ) {}
 
-  // เรียก ข้อมูลพนักงานทุกครั้งที่โหลดหน้าเว็บ
+  // เรียก ข้อมูลพุกครั้งที่โหลดหน้าเว็บ
   ngOnInit() {
     this.getEmployeeList();
   }
@@ -55,7 +57,15 @@ export class AppComponent implements OnInit {
   }
 
   openAddEditEmpForm(){
-    this._dialog.open(EmpAddEditComponent);
+    const dialogRef = this._dialog.open(EmpAddEditComponent);
+    // if dialog ปิดแล้วมีค่า ให้ ใช้ getEmployeeList เพือ update ข้อมูล
+    dialogRef.afterClosed().subscribe({
+      next:(val)=>{
+        if(val){
+          this.getEmployeeList();
+        }
+      }
+    });
   }
 
   getEmployeeList(){
@@ -68,9 +78,7 @@ export class AppComponent implements OnInit {
         console.log(this.dataSource.data)
         this.dataSource.paginator = this.paginator;
       },
-      error:(err)=>{
-        console.error(err)
-      }
+      error: console.log
     })
   }
 
@@ -83,5 +91,22 @@ export class AppComponent implements OnInit {
     }
   }
 
+  deleteEmployee(id:number){
+    this._empService.deleteEmployee(id).subscribe({
+      next: (res) =>{
+        alert('Employee deleted!');
+        this._coreService.openSnackBar("Employee deleted!");
+        this.getEmployeeList();
+      },
+      error: console.log
+    });
+  }
+
+  openEditForm(data:any){
+    // รับData
+    this._dialog.open(EmpAddEditComponent,{
+      data,
+    })
+  }
 
 }

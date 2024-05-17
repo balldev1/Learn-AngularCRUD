@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
-import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,8 @@ import { MatSortModule } from '@angular/material/sort';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule, MatButtonModule, MatIconModule, MatDialogTitle, MatDialogContent, MatInputModule, MatInput,
-    MatFormFieldModule, MatDatepickerModule, MatRadioModule, MatSelectModule, MatDialogActions,ReactiveFormsModule,
-    HttpClientModule,MatTableModule,MatPaginatorModule,MatSortModule
+    MatFormFieldModule, MatDatepickerModule, MatRadioModule, MatSelectModule, MatDialogActions, ReactiveFormsModule,
+    HttpClientModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogClose, MatSnackBarModule,
   ],
   providers: [
     provideClientHydration(),

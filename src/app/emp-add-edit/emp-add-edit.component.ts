@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import {Component, Inject, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {EmployeeService} from "../services/employee.service";
-import {DialogRef} from "@angular/cdk/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {CoreService} from "../core/core.service";
 
 @Component({
   selector: 'app-emp-add-edit',
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.scss'
 })
-export class EmpAddEditComponent {
+export class EmpAddEditComponent implements OnInit{
 
   // formGroup
   empForm: FormGroup ;
@@ -27,7 +28,9 @@ export class EmpAddEditComponent {
     // ข้อมูลที่รับเข้ามา
     private _empService: EmployeeService,
     // model dialog
-    private _dialogRef: DialogRef<EmpAddEditComponent>
+    private _dialogRef: MatDialogRef<EmpAddEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any,
+    private _coreService: CoreService
     ) {
     this.empForm = this._fb.group({
       firstName:'',
@@ -40,6 +43,11 @@ export class EmpAddEditComponent {
       experience:'',
       package:'',
     });
+  }
+
+  ngOnInit(): void{
+    // กำหนดค่าเริ่มต้นให้กับฟอร์มโดยใช้ข้อมูลที่ถูกส่งผ่านมาใน Dialog
+    this.empForm.patchValue(this.data)
   }
 
   onFormSubmit(){
@@ -56,13 +64,27 @@ export class EmpAddEditComponent {
         this.empForm.value.experience === "" ||
         this.empForm.value.package === "")
       {
-        alert("Please fill in all required fields.");
-      } else {
-        // ข้อมูลไม่เป็นค่าว่าง ''
-        this._empService.addEmployee(this.empForm.value).subscribe({
+        this._coreService.openSnackBar("Please fill in all required fields");
+      } // ถ้ามีข้อมูลฐานข้อมูลอยู่แล้ว
+      else if(this.data) {
+        this._empService.updateEmployee(this.data.id, this.empForm.value)
+          .subscribe({
           next:(val: any)=>{
-            alert("Employee added successfully");
-            this._dialogRef.close()
+            this._coreService.openSnackBar("Employee detail updated!");
+            this._dialogRef.close(true);
+            window.location.reload();
+          },
+          error:(err: any)=>{
+            console.error(err);
+          }
+        });
+      } // ถ้าไม่มีข้อมู,ในฐานข้อมูล
+      else {
+        this._empService.addEmployee(this.empForm.value)
+          .subscribe({
+          next:(val: any)=>{
+            this._coreService.openSnackBar("Employee added successfully");
+            this._dialogRef.close(true);
             window.location.reload();
           },
           error:(err: any)=>{
